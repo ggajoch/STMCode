@@ -31,8 +31,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx.h"
-#include "stm320518_eval.h"
-#include "stm320518_eval_lcd.h"
 #include <stdio.h>
 
 /* Exported types ------------------------------------------------------------*/

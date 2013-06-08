@@ -25,7 +25,7 @@
 ### ADS-LD Output File: '.\STM320518\STM320518-EVAL.axf'
 ### ADS-LD Command File: '.\STM320518\STM320518-EVAL.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\STM320518\STM320518-EVAL.lnp', Handle=0x00000670
+### Creating CmdFile '.\STM320518\STM320518-EVAL.lnp', Handle=0x00000628
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\STM320518\STM320518-EVAL.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.
