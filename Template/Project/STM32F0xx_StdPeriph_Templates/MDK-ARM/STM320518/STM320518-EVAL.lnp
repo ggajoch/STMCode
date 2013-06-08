@@ -1,0 +1,5 @@
+--cpu Cortex-M0 ".\stm320518\stm32f0xx_it.o" ".\stm320518\main.o" ".\stm320518\stm32f0xx_adc.o" ".\stm320518\stm32f0xx_crc.o" ".\stm320518\stm32f0xx_dac.o" ".\stm320518\stm32f0xx_dma.o" ".\stm320518\stm32f0xx_gpio.o" ".\stm320518\stm32f0xx_i2c.o" ".\stm320518\stm32f0xx_misc.o" ".\stm320518\stm32f0xx_rcc.o" ".\stm320518\stm32f0xx_spi.o" ".\stm320518\stm32f0xx_tim.o" ".\stm320518\stm32f0xx_usart.o" ".\stm320518\system_stm32f0xx.o" ".\stm320518\startup_stm32f0xx.o" 
+--library_type=microlib --strict --scatter ".\STM320518\STM320518-EVAL.sct" 
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\STM320518\STM320518-EVAL.map" -o .\STM320518\STM320518-EVAL.axf

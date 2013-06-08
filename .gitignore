@@ -11,3 +11,12 @@
 *.lai
 *.la
 *.a
+
+
+#STM
+*.__i
+*.crf
+*.d
+*.lst
+*.axf
+*.sct
