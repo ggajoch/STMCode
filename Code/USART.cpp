@@ -10,7 +10,7 @@ struct MineUSART
 	MineUSART()
 	{
 	}
-	void init(USART_TypeDef * USARTxx, GPIO_TypeDef * GPIOx, uint16_t TxPin, uint16_t RxPin, int32_t baudrate)
+	int32_t init(USART_TypeDef * USARTxx, GPIO_TypeDef * GPIOx, uint16_t TxPin, uint16_t RxPin, int32_t baudrate)
 	{
 		this->USARTx = USARTxx;
 		#if defined(USART1)
@@ -43,7 +43,7 @@ struct MineUSART
 		GPIO_Init(GPIOx,&GPIOInit);
 		
 		USART_InitTypeDef USARTInit;
-		USARTInit.USART_BaudRate = baudrate;//115200;//9600;
+		USARTInit.USART_BaudRate = (baudrate == 0 ? 115200 : baudrate);//115200;//9600;
 		USARTInit.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 		USARTInit.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 		USARTInit.USART_Parity = USART_Parity_No;
@@ -53,6 +53,31 @@ struct MineUSART
 		USART_Init(USARTxx,&USARTInit);
 		
 		USART_Cmd(USARTxx, ENABLE);
+		
+		if( baudrate == 0 )
+		{
+			while(true)
+			{
+				USART_AutoBaudRateConfig(USART1, USART_AutoBaudRate_StartBit);
+				USART_AutoBaudRateCmd(USART1, ENABLE);
+			 
+				/* Wait until Receive enable acknowledge flag is set */
+				while (USART_GetFlagStatus(USART1, USART_FLAG_REACK) == RESET){}
+			 
+				/* Wait until Transmit enable acknowledge flag is set */
+				while (USART_GetFlagStatus(USART1, USART_FLAG_TEACK) == RESET){}
+			 
+				/* Loop until the end of Autobaudrate phase */
+				while (USART_GetFlagStatus(USART1, USART_FLAG_ABRF) == RESET){}
+			 
+				/* If AutoBaudRate error occurred */
+				if (USART_GetFlagStatus(USART1, USART_FLAG_ABRE) == RESET)
+				{
+					break;
+				}
+			}
+		}
+		return USARTInit.USART_BaudRate;
 	}
 	void waitForTransmit()
 	{
@@ -146,3 +171,4 @@ int main(void)
 		//Serial.println(x);
   }
 }
+
